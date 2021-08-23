@@ -1,0 +1,5 @@
+name: LockedItem
+version: 1.0.0
+api: 3.21.2
+main: ytbjero\LockedItem\LockedItem
+author: ytbjero
