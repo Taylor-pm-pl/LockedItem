@@ -17,7 +17,7 @@ You can access to LockedItem by using ```LockedItem::getInstance()```
 | **Command** | **Description** |
 | --- | --- |
 | **/setlock** | **Lock the item in hand** |
-| **/unlock** | **Unlock the item in hand* |
+| **/unlock** | **Unlock the item in hand** |
 <br>
 ## 📃  Permissions:
 
