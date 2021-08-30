@@ -42,9 +42,8 @@ class LockedItem extends PluginBase implements Listener
 	public function ItemMove(PlayerDropItemEvent $event) 
 	{
 		$item = $event->getItem();
-		$lore = $event->getItem()->getLore();
-		if($item->getNameTag()->hasTag("Status")){
-		 if($item->getNameTag()->getString("Status") == self::KEY_VALUE){
+		if($item->getNamedTag()->hasTag("Status")){
+		 if($item->getNamedTag()->getString("Status") == self::KEY_VALUE){
 		 	$event->setCancelled(true);
 		 }
 		}
@@ -52,9 +51,9 @@ class LockedItem extends PluginBase implements Listener
 
 	public function setLocked(Item $item) : Item
 	{
-		$item->setNameTagEntry(new StringTag("Status", self::KEY_VALUE));
+		$item->setNamedTagEntry(new StringTag("Status", self::KEY_VALUE));
 		$status = $item->getLore();
-		$status[] = "LOCKED";
+		$status[] = "[LOCKED]";
 		$item->setLore($status);
 		return $item;
 	}
