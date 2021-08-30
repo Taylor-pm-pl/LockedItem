@@ -8,11 +8,6 @@
 - Player's item lock
 - Players aren't afraid of losing items
 
-# How to lock items
-After installing the LockItem plugin
-
-Add lore `§l§d[LOCKED]` on the item you want to lock!.
-
 # For Devolopers
 You can access to LockedItem by using ```LockedItem::getInstance()```
 
