@@ -18,7 +18,7 @@ You can access to LockedItem by using ```LockedItem::getInstance()```
 
 **Example:**
 ```php
-LockedItem::getInstance()->setLock($item);
+LockedItem::getInstance()->setLocked($item);
 ```
 # Project Infomation
 
