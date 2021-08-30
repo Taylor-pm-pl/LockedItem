@@ -4,18 +4,31 @@
 <p>Player's item lock</p>
 </div>
 
-# Features
+## Features
 - Player's item lock
 - Players aren't afraid of losing items
 
-# For Devolopers
+## For Devolopers
 You can access to LockedItem by using ```LockedItem::getInstance()```
+ 
+ <br>
+## All LockedItem Commands:
 
+| **Command** | **Description** |
+| --- | --- |
+| **/setlock** | **Lock the item in hand** |
+| **/unlock** | **Unlock the item in hand* |
+<br>
+## 📃  Permissions:
+
+- You can use permission `lockeditem.setlock` for command /setlock
+- You can use permission `lockeditem.unlock` for command /unlock
+<br>
 **Example:**
 ```php
 LockedItem::getInstance()->setLocked($item);
 ```
-# Project Infomation
+## Project Infomation
 
 | Plugin Version | Pocketmine API | PHP Version | Plugin Status |
 |---|---|---|---|
