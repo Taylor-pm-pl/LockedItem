@@ -20,7 +20,6 @@ use pocketmine\nbt\tag\StringTag;
 class LockedItem extends PluginBase implements Listener
 {
 	private static LockedItem $instance;
-	public $prefix = "§d§l⊹⊱§eLock Item§d⊰⊹";
 	public const KEY_VALUE = "§l§d[LOCKED]";
 
     public function onLoad() : void 
