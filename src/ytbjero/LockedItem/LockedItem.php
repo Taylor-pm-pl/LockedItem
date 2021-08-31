@@ -21,15 +21,33 @@ use pocketmine\event\player\PlayerDropItemEvent;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\nbt\tag\StringTag;
 
+use pocketmine\utils\Config;
+
+use ytbjero\LockedItem\libs\JackMD\UpdateNotifier\UpdateNotifier;
 class LockedItem extends PluginBase implements Listener
 {
 	private static $instance;
 	const KEY_VALUE = "Locked";
 
+	/** @var Config */
+	public $history;
+
+	public function onLoad() : void 
+    {
+        UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
+    }
+
 	public function onEnable() : void
 	{
 		self::$instance = $this;
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
+		$this->history = new Config($this->getDataFolder()."history.yml", Config::YAML);
+		if($this->getConfig()->getNested("History.Delete-onEnable") == true){
+			 foreach ($this->history->getAll() as $history => $data) {
+                $this->history->remove($history);
+            }
+            $this->history->save();
+		}
 	}
 
 	public static function getInstance() : self
@@ -54,11 +72,17 @@ class LockedItem extends PluginBase implements Listener
 				return false;
 			}
 			$item = $sender->getInventory()->getItemInHand();
+			$username = $sender->getName();
+			$item_name = $item->getName();
+			$day = date('d/m - H:i:s',time());
 			$item->setNamedTagEntry(new StringTag("Status", self::KEY_VALUE));
 			$status = $item->getLore();
 		    $status = ["LOCKED"];
 		    $item->setLore($status);
 			$sender->getInventory()->setItemInHand($item);
+					$txt = "$username lock the item with name $item_name.";
+					$this->history->set($day, $txt);
+					$this->history->save(); 
 			$sender->sendMessage(TF::GREEN . "The item in your hand is locked!");
 			return true;
 		}
@@ -78,9 +102,15 @@ class LockedItem extends PluginBase implements Listener
 			}
 			$item->getNamedTag()->removeTag("Status");
 			$status = $item->getLore();
+			$username = $sender->getName();
+			$item_name = $item->getName();
+			$day = date('d/m - H:i:s',time());
 			unset($status[array_search(["LOCKED"], $status)]);
 			$item->setLore($status);
 			$sender->getInventory()->setItemInHand($item);
+					$txt = "$username unlock the item with name $item_name.";
+					$this->history->set($day, $txt);
+					$this->history->save(); 
 			$sender->sendMessage(TF::GREEN . "The item in your hand is unlocked!");
 			return true;
 		}
@@ -90,9 +120,23 @@ class LockedItem extends PluginBase implements Listener
 	public function ItemMove(PlayerDropItemEvent $event)
 	{
 		$item = $event->getItem();
+		$player = $event->getPlayer()->getName();
+		$item_name = $item->getName();
 		if ($item->getNamedTag()->hasTag("Status")) {
 			if ($item->getNamedTag()->getString("Status") == self::KEY_VALUE) {
 				$event->setCancelled(true);
+					$day = date('d/m - H:i:s',time());
+					$txt = "$player have item with name $item_name is locked.";
+					$this->history->set($day, $txt);
+					$this->history->save(); 
+				}
+		} 
+		if($this->getConfig()->getNested("History.SaveUnlockItem") == true){
+			if (!$item->getNamedTag()->hasTag("Status", StringTag::class)) {
+				$day = date('d/m - H:i:s',time());
+					$txt = "$player have item with name $item_name is unlocked.";
+					$this->history->set($day, $txt);
+					$this->history->save(); 
 			}
 		}
 	}
