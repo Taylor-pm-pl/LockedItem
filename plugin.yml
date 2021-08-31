@@ -16,7 +16,7 @@ commands:
 permissions:
  lockeditem.setlock:
   description: "Lock the item in your hand"
-  default: false
+  default: op
  lockeditem.unlock:
   description: "Unlock the item in your hand"
-  default: false
+  default: op
