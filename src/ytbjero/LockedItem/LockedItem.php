@@ -20,7 +20,7 @@ use pocketmine\event\player\PlayerDropItemEvent;
 
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\nbt\tag\StringTag;
-
+use ytbjero\LockedItem\libs\JackMD\UpdateNotifier\UpdateNotifier;
 use pocketmine\utils\Config;
 class LockedItem extends PluginBase implements Listener
 {
@@ -29,6 +29,10 @@ class LockedItem extends PluginBase implements Listener
 
 	/** @var Config */
 	public $history;
+	public function onLoad() : void 
+    {
+        UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
+    }
 
 	public function onEnable() : void
 	{
