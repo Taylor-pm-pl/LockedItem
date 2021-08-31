@@ -22,8 +22,6 @@ use pocketmine\utils\TextFormat as TF;
 use pocketmine\nbt\tag\StringTag;
 
 use pocketmine\utils\Config;
-
-use ytbjero\LockedItem\libs\JackMD\UpdateNotifier\UpdateNotifier;
 class LockedItem extends PluginBase implements Listener
 {
 	private static $instance;
@@ -31,11 +29,6 @@ class LockedItem extends PluginBase implements Listener
 
 	/** @var Config */
 	public $history;
-
-	public function onLoad() : void 
-    {
-        UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
-    }
 
 	public function onEnable() : void
 	{
