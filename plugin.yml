@@ -7,5 +7,16 @@ author: ytbjero
 commands:
   setlock:
     description: "Lock the item in your hand"
+    usage: "/setlock"
+    permission: lockeditem.setlock
   unlock:
     description: "Unlock the item in your hand"
+    usage: "/unlock"
+    permission: lockeditem.unlock
+permissions:
+ lockeditem.setlock:
+  description: "Lock the item in your hand"
+  default: false
+ lockeditem.unlock:
+  description: "Unlock the item in your hand"
+  default: false
