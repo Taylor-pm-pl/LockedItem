@@ -28,6 +28,21 @@ You can access to LockedItem by using ```LockedItem::getInstance()```
 ```php
 LockedItem::getInstance()->setLocked($item);
 ```
+ 
+ # Configs
+## config.yml
+ ```
+ ---
+# Config Main for LockedItem
+History:
+#Set Delete-onEnable: true if you want to clear the history of players who have item locked, unlocked and use the command when the server is on.
+#Set Delete-onEnable: false if you don't want to clear the history of players who have item locked, unlocked and use the command when the server is on.
+ Delete-onEnable: false
+#Set SaveUnlockItem: true if you want to save player history with unlocked item.
+#Set SaveUnlockItem: false if you don't want to save player history with unlocked item.
+ SaveUnlockItem: false
+...
+ ```
 ## Project Infomation
 
 | Plugin Version | Pocketmine API | PHP Version | Plugin Status |
