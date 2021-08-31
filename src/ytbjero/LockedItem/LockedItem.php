@@ -59,7 +59,7 @@ class LockedItem extends PluginBase implements Listener
 	{
 		if ($command->getName() == "setlock") {
 			if (!$sender->hasPermission("lockeditem.setlock")) {
-				$sender->sendMessage($this->prefix . " You don't have permisson to use this command!");
+				$sender->sendMessage(TF::RED. " You don't have permisson to use this command!");
 				return false;
 			}
 			$item = $sender->getInventory()->getItemInHand();
