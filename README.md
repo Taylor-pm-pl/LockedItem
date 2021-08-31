@@ -1,7 +1,8 @@
-[![](https://poggit.pmmp.io/shield.state/LockedItem)]
 <div align="center">
-<h1>LockedItem| v1.0.0<h1>
-<p>Player's item lock</p>
+ 
+ ![LockedItem](https://poggit.pmmp.io/shield.state/LockedItem)
+ 
+ <h1>LockedItem | Player's item lock<h1>
 </div>
 
 ## Features
@@ -9,25 +10,30 @@
 - Players aren't afraid of losing items
 
 ## For Devolopers
-You can access to LockedItem by using ```LockedItem::getInstance()```
- 
+You can access to LockedItem by using `LockedItem::getInstance()`
  <br>
+ 
 ## All LockedItem Commands:
 
 | **Command** | **Description** |
 | --- | --- |
 | **/setlock** | **Lock the item in hand** |
 | **/unlock** | **Unlock the item in hand** |
+ 
 <br>
-## 📃  Permissions:
+ 
+## 📃Permissions:
 
 - You can use permission `lockeditem.setlock` for command /setlock
 - You can use permission `lockeditem.unlock` for command /unlock
+ 
 <br>
+
 **Example:**
-```php
+`
 LockedItem::getInstance()->setLocked($item);
-```
+`
+ 
 ## Project Infomation
 
 | Plugin Version | Pocketmine API | PHP Version | Plugin Status |
