@@ -124,7 +124,7 @@ class LockedItem extends PluginBase implements Listener{
         return $item->getNamedTag()->hasTag("Status", StringTag::class);
     }
 
-    public function setLock(Item $item) : Item
+    public function setLocked(Item $item) : Item
     {
         if(!$this->isLocked($item)) {
            $item->setNamedTagEntry(new StringTag("Status", self::KEY_VALUE));
