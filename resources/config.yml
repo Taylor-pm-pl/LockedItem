@@ -1,10 +1,14 @@
 ---
-# Config Main for LockedItem
-History:
-#Set Delete-onEnable: true if you want to clear the history of players who have item locked, unlocked and use the command when the server is on.
-#Set Delete-onEnable: false if you don't want to clear the history of players who have item locked, unlocked and use the command when the server is on.
- Delete-onEnable: false
-#Set SaveUnlockItem: true if you want to save player history with unlocked item.
-#Set SaveUnlockItem: false if you don't want to save player history with unlocked item.
- SaveUnlockItem: false
+# Config Main of LockedItem
+perm-message: You are not allowed to use this command!
+lock-message: Your item has been locked successfully!
+no-lock-message: Your item was previously locked!
+unlock-message: Your item has been successfully unlocked!
+no-unlock-message: Your item has not been locked before!
+item-hand-message: You need to hold the item in your hand to unlock!
+
+#Lore of item when locked
+item-lore: LOCKED
+# The item locked will not be able to interact with the itemframe if this is true
+no-touch: true
 ...
