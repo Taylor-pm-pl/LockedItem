@@ -142,7 +142,6 @@ class LockedItem extends PluginBase implements Listener{
            $status = $item->getLore();
          unset($status[array_search($this->getConfig()->get("item-lore"), $status)]);
          $item->setLore($status);
-           $item->setLore($item->getLore());
         }
         return $item;
     }
