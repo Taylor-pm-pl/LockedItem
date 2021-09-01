@@ -87,7 +87,7 @@ class LockedItem extends PluginBase implements Listener{
             }
             $item = $sender->getInventory()->getItemInHand();
                         if(!$this->isLocked($item)) {
-                            $sender->getInventory()->setItemInHand($this->setLock($item));
+                            $sender->getInventory()->setItemInHand($this->setLocked($item));
                             $sender->sendMessage($this->getConfig()->get("lock-message"));
                         } else{
                         $sender->sendMessage($this->getConfig()->get("no-lock-message"));
