@@ -11,4 +11,6 @@ item-hand-message: You need to hold the item in your hand to unlock!
 item-lore: LOCKED
 # The item locked will not be able to interact with the itemframe if this is true
 no-touch: true
+# The when the item is locked, it cannot be put in the chest if this is true
+no-change-inventory: true
 ...

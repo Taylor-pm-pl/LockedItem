@@ -4,6 +4,11 @@ declare (strict_types=1);
 
 namespace ytbjero\LockedItem;
 
+use pocketmine\event\inventory\InventoryTransactionEvent;
+use pocketmine\inventory\ChestInventory;
+use pocketmine\inventory\DoubleChestInventory;
+use pocketmine\inventory\EnderChestInventory;
+use pocketmine\inventory\PlayerInventory;
 use pocketmine\Player;
 use pocketmine\Server;
 
@@ -68,7 +73,35 @@ class LockedItem extends PluginBase implements Listener{
                     }
                 }
             }
-
+     /**
+      * @param InventoryTransactionEvent $event
+      * @return void
+      */
+    public function onTitle(InventoryTransactionEvent $event) : void
+    {
+        $iPlayer = null;
+        $iChest = null;
+        foreach ($event->getTransaction()->getActions() as $action){
+            foreach ($event->getTransaction()->getInventories() as $inventory){
+                if($inventory instanceof PlayerInventory){
+                    $iPlayer = true;
+                }
+                if($inventory instanceof ChestInventory || $inventory instanceof DoubleChestInventory || $inventory instanceof EnderChestInventory){
+                    $iChest = true;
+                }
+                if($iPlayer && $iChest){
+                    $player = $inventory->getViewers()[key($inventory->getViewers())];
+                    $item = $action->getTargetItem();
+                    if($this->getConfig()->get("no-change-inventory") == true){
+                        if($this->isLocked($item)){
+                            $event->setCancelled(true);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     public function onCommand(CommandSender $sender, Command $command, String $label, Array $args) : bool
     {
         if($command->getName() == "setlock") {
