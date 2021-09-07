@@ -1,22 +1,24 @@
+---
 name: LockedItem
-version: 3.0.0
-api: 3.21.2
+version: 3.0.1
+api:
+- 4.0.0
 main: ytbjero\LockedItem\LockedItem
 author: ytbjero
-
 commands:
   setlock:
-    description: "Lock the item in your hand"
-    usage: "/setlock"
+    description: Lock the item in your hand
+    usage: /setlock
     permission: lockeditem.setlock
   unlock:
-    description: "Unlock the item in your hand"
-    usage: "/unlock"
+    description: Unlock the item in your hand
+    usage: /unlock
     permission: lockeditem.unlock
 permissions:
- lockeditem.setlock:
-  description: "Lock the item in your hand"
-  default: op
- lockeditem.unlock:
-  description: "Unlock the item in your hand"
-  default: op
+  lockeditem.setlock:
+    description: Lock the item in your hand
+    default: op
+  lockeditem.unlock:
+    description: Unlock the item in your hand
+    default: op
+...
