@@ -45,7 +45,7 @@ class UpdateNotifyTask extends AsyncTask{
 	/** @var string */
 	private const POGGIT_RELEASES_URL = "https://poggit.pmmp.io/releases.min.json?name=";
 
-	public function __construct(private string $pluginName, private string $pluginVersion){
+	public function __construct(public string $pluginName, public string $pluginVersion){
 	}
 
 	public function onRun() : void{
