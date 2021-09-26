@@ -2,7 +2,7 @@
 name: LockedItem
 version: 3.0.1
 api:
-- 4.0.0
+- 3.22.0
 main: ytbjero\LockedItem\LockedItem
 author: ytbjero
 commands:
