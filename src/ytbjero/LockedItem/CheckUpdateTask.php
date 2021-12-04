@@ -3,7 +3,7 @@
 /**
  * Copyright (c) 2021 JeroGamingYT
  * LockedItem is licensed under the GNU Lesser General Public License v3.0
- * GitHub: https://github.com/JeroGamingYT\LockedItem
+ * GitHub: https://github.com/JeroGamingYT/LockedItem
  */
 
 declare(strict_types=1);
