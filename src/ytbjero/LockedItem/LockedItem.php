@@ -22,6 +22,8 @@ use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
 
 use pocketmine\block\Block;
+use pocketmine\block\BlockFactory;
+use pocketmine\block\ItemFrame;
 use pocketmine\item\Item;
 
 use pocketmine\nbt\tag\StringTag;
@@ -35,16 +37,17 @@ class LockedItem extends PluginBase implements Listener{
     
     const KEY_VALUE = "isLocked";
 
-    public function onLoad() : void 
-    {
-        UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
-    }
-
     public function onEnable() : void
     {
         self::$instance = $this;
         $this->saveDefaultConfig();
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->checkUpdate();
+    }
+
+    public function checkUpdate(bool $isRetry = false): void {
+
+        $this->getServer()->getAsyncPool()->submitTask(new CheckUpdateTask($this->getDescription()->getName(), $this->getDescription()->getVersion()));
     }
    
     public static function getInstance() : self
@@ -56,7 +59,7 @@ class LockedItem extends PluginBase implements Listener{
     {
         $item = $event->getItem();
         if ($this->isLocked($item)) {
-                $event->setCancelled(true);
+                $event->cancel();
         }
     }
 
@@ -65,10 +68,10 @@ class LockedItem extends PluginBase implements Listener{
             $player = $event->getPlayer();
             $item = $player->getInventory()->getItemInHand();
             $block = $event->getBlock();
-            if($block->getId() === Block::ITEM_FRAME_BLOCK){
+            if($block instanceof ItemFrame){
                 if ($this->getConfig()->get("no-touch") == true) {
                     if ($this->isLocked($item)) {
-                        $event->setCancelled(true);
+                        $event->cancel();
                         }
                     }
                 }
@@ -82,11 +85,11 @@ class LockedItem extends PluginBase implements Listener{
         $iPlayer = null;
         $iChest = null;
         foreach ($event->getTransaction()->getActions() as $action){
-            foreach ($event->getTransaction()->getInventories() as $inventory){
-                if($inventory instanceof PlayerInventory){
+            foreach($event->getTransaction()->getInventories() as $inventory){
+                if(!$inventory instanceof PlayerInventory){
                     $iPlayer = true;
                 }
-                if($inventory instanceof ChestInventory || $inventory instanceof DoubleChestInventory || $inventory instanceof EnderChestInventory){
+                if(!$inventory instanceof ChestInventory || !$inventory instanceof DoubleChestInventory || !$inventory instanceof EnderChestInventory){
                     $iChest = true;
                 }
                 if($iPlayer && $iChest){
@@ -94,7 +97,7 @@ class LockedItem extends PluginBase implements Listener{
                     $item = $action->getTargetItem();
                     if($this->getConfig()->get("no-change-inventory") == true){
                         if($this->isLocked($item)){
-                            $event->setCancelled(true);
+                            $event->cancel();
                         }
                     }
                 }
@@ -105,7 +108,7 @@ class LockedItem extends PluginBase implements Listener{
     public function onCommand(CommandSender $sender, Command $command, String $label, Array $args) : bool
     {
         if($command->getName() == "setlock") {
-            if(!$sender instanceof Player) {
+            if($sender instanceof Player) {
                 $sender->sendMessage(TF::RED . "This command only works in game!");
                 return false;
             }
@@ -127,7 +130,7 @@ class LockedItem extends PluginBase implements Listener{
                         }
                     }
         if($command->getName() == "unlock") {
-            if(!$sender instanceof Player) {
+            if($sender instanceof Player) {
                 $sender->sendMessage(TF::RED . "This command only works in game!");
                 return false;
             }
@@ -154,13 +157,14 @@ class LockedItem extends PluginBase implements Listener{
     
     public function isLocked(Item $item): bool
     {
-        return $item->getNamedTag()->hasTag("Status", StringTag::class);
+        return $item->getNamedTag()->getTag("Status") != null;
     }
 
     public function setLocked(Item $item) : Item
     {
         if(!$this->isLocked($item)) {
-           $item->setNamedTagEntry(new StringTag("Status", self::KEY_VALUE));
+            $nbt = $item->getNamedTag()->setString("Status", self::KEY_VALUE);
+           $item->setNamedTag($nbt);
            $status = $item->getLore();
            $status[] = $this->getConfig()->get("item-lore");
            $item->setLore($status);   
