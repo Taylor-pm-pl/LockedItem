@@ -9,7 +9,7 @@ use pocketmine\inventory\ChestInventory;
 use pocketmine\inventory\DoubleChestInventory;
 use pocketmine\inventory\EnderChestInventory;
 use pocketmine\inventory\PlayerInventory;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\Server;
 
 use pocketmine\event\Listener;
