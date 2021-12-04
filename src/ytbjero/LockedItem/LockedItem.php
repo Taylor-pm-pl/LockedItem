@@ -21,8 +21,6 @@ use pocketmine\command\CommandSender;
 
 use pocketmine\plugin\PluginBase;
 
-use pocketmine\block\Block;
-use pocketmine\block\BlockFactory;
 use pocketmine\block\ItemFrame;
 use pocketmine\item\Item;
 
