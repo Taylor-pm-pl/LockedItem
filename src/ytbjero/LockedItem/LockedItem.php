@@ -106,7 +106,7 @@ class LockedItem extends PluginBase implements Listener{
     public function onCommand(CommandSender $sender, Command $command, String $label, Array $args) : bool
     {
         if($command->getName() == "setlock") {
-            if($sender instanceof Player) {
+            if(!$sender instanceof Player) {
                 $sender->sendMessage(TF::RED . "This command only works in game!");
                 return false;
             }
@@ -128,7 +128,7 @@ class LockedItem extends PluginBase implements Listener{
                         }
                     }
         if($command->getName() == "unlock") {
-            if($sender instanceof Player) {
+            if(!$sender instanceof Player) {
                 $sender->sendMessage(TF::RED . "This command only works in game!");
                 return false;
             }
