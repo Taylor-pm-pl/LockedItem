@@ -5,9 +5,9 @@ declare (strict_types=1);
 namespace ytbjero\LockedItem;
 
 use pocketmine\event\inventory\InventoryTransactionEvent;
-use pocketmine\inventory\ChestInventory;
-use pocketmine\inventory\DoubleChestInventory;
-use pocketmine\inventory\EnderChestInventory;
+use pocketmine\block\inventory\ChestInventory;
+use pocketmine\block\inventory\DoubleChestInventory;
+use pocketmine\block\inventory\EnderChestInventory;
 use pocketmine\inventory\PlayerInventory;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -87,7 +87,7 @@ class LockedItem extends PluginBase implements Listener{
                 if(!$inventory instanceof PlayerInventory){
                     $iPlayer = true;
                 }
-                if(!$inventory instanceof ChestInventory || !$inventory instanceof DoubleChestInventory || !$inventory instanceof EnderChestInventory){
+                if($inventory instanceof ChestInventory || $inventory instanceof DoubleChestInventory || $inventory instanceof EnderChestInventory){
                     $iChest = true;
                 }
                 if($iPlayer && $iChest){
