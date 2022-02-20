@@ -13,4 +13,5 @@ item-lore: LOCKED
 no-touch: true
 # The when the item is locked, it cannot be put in the chest if this is true
 no-change-inventory: true
+
 ...
