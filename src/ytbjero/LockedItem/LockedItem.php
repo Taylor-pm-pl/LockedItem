@@ -8,6 +8,9 @@ use pocketmine\event\inventory\InventoryTransactionEvent;
 use pocketmine\block\inventory\ChestInventory;
 use pocketmine\block\inventory\DoubleChestInventory;
 use pocketmine\block\inventory\EnderChestInventory;
+use pocketmine\block\inventory\FurnaceInventory;
+use pocketmine\block\inventory\ShulkerBoxInventory;
+use pocketmine\block\inventory\HopperInventory;
 use pocketmine\inventory\PlayerInventory;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -87,7 +90,7 @@ class LockedItem extends PluginBase implements Listener{
                 if(!$inventory instanceof PlayerInventory){
                     $iPlayer = true;
                 }
-                if($inventory instanceof ChestInventory || $inventory instanceof DoubleChestInventory || $inventory instanceof EnderChestInventory){
+                if($inventory instanceof ChestInventory || $inventory instanceof DoubleChestInventory || $inventory instanceof EnderChestInventory || $inventory instanceof FurnaceInventory || $inventory instanceof ShulkerBoxInventory || $inventory instanceof HopperInventory){
                     $iChest = true;
                 }
                 if($iPlayer && $iChest){
