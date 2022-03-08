@@ -1,7 +1,7 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/JeroGamingYT/LockedItem
 build-by-default: true
 branches:
-- main
+- stable
 projects:
   LockedItem:
     path: ""
