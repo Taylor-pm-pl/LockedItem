@@ -12,6 +12,7 @@ use pocketmine\block\inventory\FurnaceInventory;
 use pocketmine\block\inventory\ShulkerBoxInventory;
 use pocketmine\block\inventory\HopperInventory;
 use pocketmine\inventory\PlayerInventory;
+use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 use pocketmine\Server;
 
@@ -118,7 +119,7 @@ class LockedItem extends PluginBase implements Listener{
                 return false;
             }
             $item = $sender->getInventory()->getItemInHand();
-            if($item->getId() == 0){
+            if($item->equals(VanillaItems::AIR())){
                 $sender->sendMessage($this->getConfig()->get("item-hand-message"));
                 return false;
             }
