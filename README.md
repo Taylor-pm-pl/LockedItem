@@ -12,6 +12,7 @@
 You can access to LockedItem by using ```LockedItem::getInstance()```
  
  <br>
+
 ## All LockedItem Commands:
 
 | **Command** | **Description** |
@@ -19,6 +20,7 @@ You can access to LockedItem by using ```LockedItem::getInstance()```
 | **/setlock** | **Lock the item in hand** |
 | **/unlock** | **Unlock the item in hand** |
 <br>
+
 ## 📃  Permissions:
 
 - You can use permission `lockeditem.setlock` for command /setlock
@@ -50,6 +52,6 @@ no-touch: true
 ## Project Infomation
 
 | Plugin Version | Pocketmine API | PHP Version | Plugin Status |
-|---|---|---|---|
-| 1.0.0 | 3.x.x | 7.4 | Completed |
+|----------------|----------------|-------------|---|
+| 6.0.0          | 5.x.x          | 8.1         | Completed |
  
