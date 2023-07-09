@@ -141,7 +141,7 @@ class LockedItem extends PluginBase implements Listener{
                 return false;
             }
             $item = $sender->getInventory()->getItemInHand();
-            if($item->getId() == 0){
+            if($item->equals(VanillaItems::AIR())){
                 $sender->sendMessage($this->getConfig()->get("item-hand-message"));
                 return false;
             }
